@@ -1068,6 +1068,58 @@ function gz$gwx_2(){
 if( __WXML_GLOBAL__.ops_cached.$gwx_2)return __WXML_GLOBAL__.ops_cached.$gwx_2
 __WXML_GLOBAL__.ops_cached.$gwx_2=[];
 (function(z){var a=11;function Z(ops){z.push(ops)}
+Z([3,'b3d36b4c'])
+Z([3,'_view b3d36b4c'])
+Z([3,'width: 100vw;'])
+Z([3,'_movable-area b3d36b4c'])
+Z([[2,'=='],[[7],[3,'currentImagePath']],[1,undefined]])
+Z([a,[3,'width: 100%; background: #0FAEFF; opacity: 0.33; z-index: 1; '],[[2,'+'],[[2,'+'],[1,'height:'],[[2,'+'],[[7],[3,'currentImageHeight']],[1,'px']]],[1,';']]])
+Z([3,'_movable-view b3d36b4c'])
+Z([3,'all'])
+Z([3,'xxxx'])
+Z([3,'_image b3d36b4c'])
+Z(z[4])
+Z([3,'widthFix'])
+Z([3,'c'])
+Z([[7],[3,'currentImagePath']])
+Z([3,'width: 100%; position: absolute; top: 0;'])
+Z([3,'handleProxy'])
+Z([3,'_button b3d36b4c'])
+Z([[7],[3,'$k']])
+Z([1,'b3d36b4c-0'])
+Z([[2,'!='],[[6],[[7],[3,'choosenImagePaths']],[3,'length']],[1,0]])
+Z([3,'primary'])
+Z([3,'选择图片'])
+Z(z[1])
+Z([3,'display: flex; flex-direction: row; flex-wrap: wrap;'])
+Z([3,'index'])
+Z([3,'imagePath'])
+Z([[7],[3,'choosenImagePaths']])
+Z(z[24])
+Z(z[15])
+Z(z[1])
+Z(z[17])
+Z([[2,'+'],[1,'b3d36b4c-1-'],[[7],[3,'index']]])
+Z([[7],[3,'index']])
+Z([a,[3,' '],[[2,'+'],[[2,'+'],[1,'background:'],[[2,'?:'],[[2,'=='],[[7],[3,'currentImageIndex']],[[7],[3,'index']]],[1,'red'],[1,'#ffffff']]],[1,';']]])
+Z(z[9])
+Z([3,'aspectFit'])
+Z([[7],[3,'imagePath']])
+Z([a,z[33][1],[[2,'+'],[[2,'+'],[[2,'+'],[[2,'+'],[[2,'+'],[1,'width:'],[[2,'+'],[[2,'/'],[[7],[3,'screenWidth']],[1,3]],[1,'px']]],[1,';']],[1,'height:']],[[2,'+'],[[2,'/'],[[7],[3,'screenWidth']],[1,3]],[1,'px']]],[1,';']]])
+})(__WXML_GLOBAL__.ops_cached.$gwx_2);return __WXML_GLOBAL__.ops_cached.$gwx_2
+}
+function gz$gwx_3(){
+if( __WXML_GLOBAL__.ops_cached.$gwx_3)return __WXML_GLOBAL__.ops_cached.$gwx_3
+__WXML_GLOBAL__.ops_cached.$gwx_3=[];
+(function(z){var a=11;function Z(ops){z.push(ops)}
+Z([[9],[[10],[[6],[[7],[3,'$root']],[1,'0']]],[[8],'$root',[[7],[3,'$root']]]])
+Z([3,'b3d36b4c'])
+})(__WXML_GLOBAL__.ops_cached.$gwx_3);return __WXML_GLOBAL__.ops_cached.$gwx_3
+}
+function gz$gwx_4(){
+if( __WXML_GLOBAL__.ops_cached.$gwx_4)return __WXML_GLOBAL__.ops_cached.$gwx_4
+__WXML_GLOBAL__.ops_cached.$gwx_4=[];
+(function(z){var a=11;function Z(ops){z.push(ops)}
 Z([3,'ccb09d8c'])
 Z([3,'_view ccb09d8c'])
 Z([3,'width: 100vw; display: flex; flex-direction: column; justify-content: flex-start; align-items: center;'])
@@ -1089,33 +1141,122 @@ Z([1,'ccb09d8c-1'])
 Z([[2,'!'],[[7],[3,'canDownload']]])
 Z([3,'default'])
 Z([3,'保存图片'])
-})(__WXML_GLOBAL__.ops_cached.$gwx_2);return __WXML_GLOBAL__.ops_cached.$gwx_2
+})(__WXML_GLOBAL__.ops_cached.$gwx_4);return __WXML_GLOBAL__.ops_cached.$gwx_4
 }
-function gz$gwx_3(){
-if( __WXML_GLOBAL__.ops_cached.$gwx_3)return __WXML_GLOBAL__.ops_cached.$gwx_3
-__WXML_GLOBAL__.ops_cached.$gwx_3=[];
+function gz$gwx_5(){
+if( __WXML_GLOBAL__.ops_cached.$gwx_5)return __WXML_GLOBAL__.ops_cached.$gwx_5
+__WXML_GLOBAL__.ops_cached.$gwx_5=[];
 (function(z){var a=11;function Z(ops){z.push(ops)}
 Z([[9],[[10],[[6],[[7],[3,'$root']],[1,'0']]],[[8],'$root',[[7],[3,'$root']]]])
 Z([3,'ccb09d8c'])
-})(__WXML_GLOBAL__.ops_cached.$gwx_3);return __WXML_GLOBAL__.ops_cached.$gwx_3
+})(__WXML_GLOBAL__.ops_cached.$gwx_5);return __WXML_GLOBAL__.ops_cached.$gwx_5
 }
 __WXML_GLOBAL__.ops_set.$gwx=z;
 __WXML_GLOBAL__.ops_init.$gwx=true;
 var nv_require=function(){var nnm={};var nom={};return function(n){return function(){if(!nnm[n]) return undefined;try{if(!nom[n])nom[n]=nnm[n]();return nom[n];}catch(e){e.message=e.message.replace(/nv_/g,'');var tmp = e.stack.substring(0,e.stack.lastIndexOf(n));e.stack = tmp.substring(0,tmp.lastIndexOf('\n'));e.stack = e.stack.replace(/\snv_/g,' ');e.stack = $gstack(e.stack);e.stack += '\n    at ' + n.substring(2);console.error(e);}
 }}}()
-var x=['./common/slots.wxml','./pages/rili/rili.vue.wxml','./pages/rili/rili.wxml','./rili.vue.wxml'];d_[x[0]]={}
+var x=['./common/slots.wxml','./pages/pics/pics.vue.wxml','./pages/pics/pics.wxml','./pics.vue.wxml','./pages/rili/rili.vue.wxml','./pages/rili/rili.wxml','./rili.vue.wxml'];d_[x[0]]={}
 var m0=function(e,s,r,gg){
 var z=gz$gwx_1()
 return r
 }
 e_[x[0]]={f:m0,j:[],i:[],ti:[],ic:[]}
 d_[x[1]]={}
-d_[x[1]]["ccb09d8c"]=function(e,s,r,gg){
+d_[x[1]]["b3d36b4c"]=function(e,s,r,gg){
 var z=gz$gwx_2()
-var b=x[1]+':ccb09d8c'
+var b=x[1]+':b3d36b4c'
+r.wxVkey=b
+gg.f=$gdc(f_["./pages/pics/pics.vue.wxml"],"",1)
+if(p_[b]){_wl(b,x[1]);return}
+p_[b]=true
+try{
+cs.push("./pages/pics/pics.vue.wxml:view:1:27")
+var oB=_mz(z,'view',['class',1,'style',1],[],e,s,gg)
+cs.push("./pages/pics/pics.vue.wxml:movable-area:1:78")
+var xC=_mz(z,'movable-area',['class',3,'hidden',1,'style',2],[],e,s,gg)
+cs.push("./pages/pics/pics.vue.wxml:movable-view:1:287")
+var oD=_mz(z,'movable-view',['class',6,'direction',1],[],e,s,gg)
+var fE=_oz(z,8,e,s,gg)
+_(oD,fE)
+cs.pop()
+_(xC,oD)
+cs.pop()
+_(oB,xC)
+cs.push("./pages/pics/pics.vue.wxml:image:1:382")
+var cF=_mz(z,'image',['class',9,'hidden',1,'mode',2,'ref',3,'src',4,'style',5],[],e,s,gg)
+cs.pop()
+_(oB,cF)
+cs.push("./pages/pics/pics.vue.wxml:button:1:564")
+var hG=_mz(z,'button',['bindtap',15,'class',1,'data-comkey',2,'data-eventid',3,'hidden',4,'type',5],[],e,s,gg)
+var oH=_oz(z,21,e,s,gg)
+_(hG,oH)
+cs.pop()
+_(oB,hG)
+cs.push("./pages/pics/pics.vue.wxml:view:1:751")
+var cI=_mz(z,'view',['class',22,'style',1],[],e,s,gg)
+var oJ=_v()
+_(cI,oJ)
+cs.push("./pages/pics/pics.vue.wxml:view:1:841")
+var lK=function(tM,aL,eN,gg){
+cs.push("./pages/pics/pics.vue.wxml:view:1:841")
+var oP=_mz(z,'view',['bindtap',28,'class',1,'data-comkey',2,'data-eventid',3,'key',4,'style',5],[],tM,aL,gg)
+cs.push("./pages/pics/pics.vue.wxml:image:1:1145")
+var xQ=_mz(z,'image',['class',34,'mode',1,'src',2,'style',3],[],tM,aL,gg)
+cs.pop()
+_(oP,xQ)
+cs.pop()
+_(eN,oP)
+return eN
+}
+oJ.wxXCkey=2
+_2z(z,26,lK,e,s,gg,oJ,'imagePath','index','index')
+cs.pop()
+cs.pop()
+_(oB,cI)
+cs.pop()
+_(r,oB)
+}catch(err){
+p_[b]=false
+throw err
+}
+p_[b]=false
+return r
+}
+var m1=function(e,s,r,gg){
+var z=gz$gwx_2()
+return r
+}
+e_[x[1]]={f:m1,j:[],i:[],ti:[],ic:[]}
+d_[x[2]]={}
+var m2=function(e,s,r,gg){
+var z=gz$gwx_3()
+var oD=e_[x[2]].i
+_ai(oD,x[3],e_,x[2],1,1)
+var fE=_v()
+_(r,fE)
+cs.push("./pages/pics/pics.wxml:template:2:6")
+var cF=_oz(z,1,e,s,gg)
+var hG=_gd(x[2],cF,e_,d_)
+if(hG){
+var oH=_1z(z,0,e,s,gg) || {}
+var cur_globalf=gg.f
+fE.wxXCkey=3
+hG(oH,oH,fE,gg)
+gg.f=cur_globalf
+}
+else _w(cF,x[2],2,18)
+cs.pop()
+oD.pop()
+return r
+}
+e_[x[2]]={f:m2,j:[],i:[],ti:[x[3]],ic:[]}
+d_[x[4]]={}
+d_[x[4]]["ccb09d8c"]=function(e,s,r,gg){
+var z=gz$gwx_4()
+var b=x[4]+':ccb09d8c'
 r.wxVkey=b
 gg.f=$gdc(f_["./pages/rili/rili.vue.wxml"],"",1)
-if(p_[b]){_wl(b,x[1]);return}
+if(p_[b]){_wl(b,x[4]);return}
 p_[b]=true
 try{
 cs.push("./pages/rili/rili.vue.wxml:view:1:27")
@@ -1149,34 +1290,34 @@ throw err
 p_[b]=false
 return r
 }
-var m1=function(e,s,r,gg){
-var z=gz$gwx_2()
+var m3=function(e,s,r,gg){
+var z=gz$gwx_4()
 return r
 }
-e_[x[1]]={f:m1,j:[],i:[],ti:[],ic:[]}
-d_[x[2]]={}
-var m2=function(e,s,r,gg){
-var z=gz$gwx_3()
-var oD=e_[x[2]].i
-_ai(oD,x[3],e_,x[2],1,1)
-var fE=_v()
-_(r,fE)
+e_[x[4]]={f:m3,j:[],i:[],ti:[],ic:[]}
+d_[x[5]]={}
+var m4=function(e,s,r,gg){
+var z=gz$gwx_5()
+var lK=e_[x[5]].i
+_ai(lK,x[6],e_,x[5],1,1)
+var aL=_v()
+_(r,aL)
 cs.push("./pages/rili/rili.wxml:template:2:6")
-var cF=_oz(z,1,e,s,gg)
-var hG=_gd(x[2],cF,e_,d_)
-if(hG){
-var oH=_1z(z,0,e,s,gg) || {}
+var tM=_oz(z,1,e,s,gg)
+var eN=_gd(x[5],tM,e_,d_)
+if(eN){
+var bO=_1z(z,0,e,s,gg) || {}
 var cur_globalf=gg.f
-fE.wxXCkey=3
-hG(oH,oH,fE,gg)
+aL.wxXCkey=3
+eN(bO,bO,aL,gg)
 gg.f=cur_globalf
 }
-else _w(cF,x[2],2,18)
+else _w(tM,x[5],2,18)
 cs.pop()
-oD.pop()
+lK.pop()
 return r
 }
-e_[x[2]]={f:m2,j:[],i:[],ti:[x[3]],ic:[]}
+e_[x[5]]={f:m4,j:[],i:[],ti:[x[6]],ic:[]}
 if(path&&e_[path]){
 window.__wxml_comp_version__=0.02
 return function(env,dd,global){$gwxc=0;var root={"tag":"wx-page"};root.children=[]
@@ -1303,6 +1444,9 @@ setCssToHead([])();setCssToHead([[2,0]],undefined,{path:"./app.wxss"})();
 
 __wxAppCode__['app.wxss']=setCssToHead([[2,0]],undefined,{path:"./app.wxss"});    
 __wxAppCode__['app.wxml']=$gwx('./app.wxml');
+
+__wxAppCode__['pages/pics/pics.wxss']=setCssToHead(["wx-button { margin: 20px; }\n",],undefined,{path:"./pages/pics/pics.wxss"});    
+__wxAppCode__['pages/pics/pics.wxml']=$gwx('./pages/pics/pics.wxml');
 
 __wxAppCode__['pages/rili/rili.wxss']=undefined;    
 __wxAppCode__['pages/rili/rili.wxml']=$gwx('./pages/rili/rili.wxml');

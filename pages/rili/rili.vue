@@ -10,6 +10,8 @@
 </template>
 
 <script>
+	import dayjs from 'dayjs';
+	
 	export default {
 		data() {
 			return {
@@ -18,6 +20,7 @@
 		},
 
 		onReady() {
+			console.log()
 			const context = uni.createCanvasContext('myCanvas')
 			context.fillStyle = '#FFFFFF'
 			context.fillRect(0, 0, 300, 300)
@@ -68,7 +71,7 @@
 						const imagePath = res.tempFilePaths[0]
 						uni.getImageInfo({
 							src: res.tempFilePaths[0],
-							success(image){
+							success(image) {
 								const context = uni.createCanvasContext('myCanvas')
 								context.clearRect(0, 0, 300, 300)
 								context.arc(150, 145, 130, 0, 360)
@@ -85,6 +88,10 @@
 								context.globalCompositeOperation = 'source-over'
 								context.drawImage('../../static/img/logo.jpg', 10, 260, 500 / 7, 198 / 7)
 								context.drawImage('../../static/img/qr.jpeg', 250, 250, 37, 37)
+								context.setFontSize(20)
+								context.setTextAlign('center')
+								context.setFillStyle('DarkGray')
+								context.fillText(dayjs().format('YYYY-MM-DD'), 150, 45)
 								context.draw()
 								_this.canDownload = true
 							}

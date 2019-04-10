@@ -1,6 +1,7 @@
 {
   "pages": [
-    "pages/rili/rili"
+    "pages/rili/rili",
+    "pages/pics/pics"
   ],
   "subPackages": [],
   "window": {
@@ -17,6 +18,12 @@
       {
         "pagePath": "pages/rili/rili",
         "text": "每日对话",
+        "iconPath": "static/img/user.png",
+        "selectedIconPath": "static/img/userHL.png"
+      },
+      {
+        "pagePath": "pages/pics/pics",
+        "text": "批量水印",
         "iconPath": "static/img/user.png",
         "selectedIconPath": "static/img/userHL.png"
       }

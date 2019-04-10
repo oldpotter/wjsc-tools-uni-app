@@ -7,8 +7,8 @@
   "id": "__UNI__5738B05",
   "name": "工具集",
   "version": {
-    "name": "1.0.0",
-    "code": "100"
+    "name": "1.1.0",
+    "code": 110
   },
   "description": "无境书茶工具集合",
   "launch_path": "__uniappservice.html",
