@@ -6,7 +6,13 @@
 				"navigationBarTitleText": "每日对话"
 			}
 		}
-	],
+	    ,{
+            "path" : "pages/pics/pics",
+            "style" : {
+				"navigationBarTitleText": "批量水印"
+			}
+        }
+    ],
 	"tabBar": {
 		"color": "#7a7e83",
 		"selectedColor": "#0faeff",
@@ -14,6 +20,12 @@
 		"list": [{
 			"pagePath": "pages/rili/rili",
 			"text": "每日对话",
+			"iconPath": "static/img/user.png",
+			"selectedIconPath": "static/img/userHL.png"
+		},
+		{
+			"pagePath": "pages/pics/pics",
+			"text": "批量水印",
 			"iconPath": "static/img/user.png",
 			"selectedIconPath": "static/img/userHL.png"
 		}]
