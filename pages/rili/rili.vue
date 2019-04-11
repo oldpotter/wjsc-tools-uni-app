@@ -5,22 +5,28 @@
 		<view style="display: flex; flex-direction: row; justify-content: space-between; width: 90vw;">
 			<button type="primary" @click="open">获取图片</button>
 			<button type="default" @click="save" :disabled="!canDownload">保存图片</button>
+			<button type="default" @click="getText" :disabled="!canDownload">识别文字</button>
 		</view>
+		<!-- <image :src="c" mode="aspectFit"></image> -->
+		<textarea style="border: 1upx solid #DDDDDD; margin: 20px 10px; " maxlength="-1" v-model="text" :style="{display: !text? 'none':'block'}" />
+		<button type="default" @click="copy" :hidden="!text">复制文本</button>
+		
 	</view>
 </template>
 
 <script>
-	import dayjs from 'dayjs';
-	
+	import dayjs from 'dayjs'
+	import { pathToBase64, base64ToPath } from 'image-tools'
 	export default {
 		data() {
 			return {
-				canDownload: false
+				canDownload: false,
+				text: '',
+				// c: ''
 			};
 		},
 
 		onReady() {
-			console.log()
 			const context = uni.createCanvasContext('myCanvas')
 			context.fillStyle = '#FFFFFF'
 			context.fillRect(0, 0, 300, 300)
@@ -33,6 +39,19 @@
 		},
 
 		methods: {
+			copy(){
+				const _this = this
+				uni.setClipboardData({
+					data: _this.text,
+					success(){
+						uni.showToast({
+							title: '已复制到剪贴板',
+							mask: false,
+							duration: 1500
+						});
+					}
+				})
+			},
 			//  重新调整选择图片
 			getCanvasInfo(headImg, canvW, canH) {
 				const imgX = headImg.width
@@ -105,6 +124,56 @@
 						});
 					}
 				})
+			},
+
+			getText(){
+				const _this = this
+				uni.showLoading({
+					title: '',
+					mask: false
+				});
+				setTimeout(() => {
+					uni.canvasToTempFilePath({
+						canvasId: 'myCanvas',
+						fileType:'jpg',
+						success(res) {
+							const img = res.tempFilePath
+							pathToBase64(img)
+								.then(base64=>{
+									
+									uni.request({
+											url: 'https://ocrapi-document.taobao.com/ocrservice/document',
+											method: 'POST',
+											header: {
+												'Authorization': 'APPCODE afe6ff03025c425fb75801d07ae0b3fe'
+											},
+											data: {
+												img: base64
+											},
+											success: res => {
+												res.data.prism_wordsInfo.forEach((item, index, array) => {
+													if(index != (array.length-1)) {
+														_this.text += item.word		
+													}else{
+														_this.text = '【2019年无境书茶日历】'.concat('', _this.text)
+													}
+												})
+											},
+											fail: (err) => {
+												console.error(JSON.stringify(err))
+											},
+											complete: () => {
+												uni.hideLoading()
+											}
+										})
+									
+								})
+							// _this.c = img
+							
+						},
+					})
+				
+				}, 100)
 			},
 
 			save() {
