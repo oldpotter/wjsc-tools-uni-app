@@ -1,17 +1,16 @@
 <template>
 	<view style="width: 100vw;">
-		<movable-area :hidden="currentImagePath == undefined" style="width: 100%; background: #0FAEFF; opacity: 0.33; z-index: 1;" :style="{height: currentImageHeight + 'px'}">
-			<movable-view direction="all">xxxx</movable-view>
-		</movable-area>
-		<image ref='c' style="width: 100%; position: absolute; top: 0;" :src="currentImagePath" mode="widthFix" :hidden='currentImagePath == undefined'></image>
+		<image  style="position: absolute; z-index: 1;"  v-for="(logo, index) in logos" :key="index" :style="{width: logo.width + 'px', height:logo.height + 'px'}" :src="logo.path" mode="aspectFit"></image>
+		<image style="width: 100%;" :src="currentImagePath" mode="widthFix" :hidden='currentImagePath == undefined'></image>
 		<button type="primary" @click="chooseImage" :hidden="choosenImagePaths.length != 0">选择图片</button>
+		<button type="default" @click="addLogo" :hidden="currentImagePath == undefined">添加Logo</button>
 		<view style="display: flex; flex-direction: row; flex-wrap: wrap;">
 			<view :style="{background: currentImageIndex== index ? 'red':'#ffffff'}" v-for="(imagePath, index) in choosenImagePaths"
 			 :key="index" @click="clickImage(index)">
 				<image :src="imagePath" mode="aspectFit" :style="{width: screenWidth/3 + 'px', height: screenWidth/3 + 'px'}"></image>
 			</view>
 		</view>
-		
+		<button type="primary" @click="processPics" :hidden="currentImagePath == undefined">完成</button>
 	</view>
 </template>
 
@@ -22,7 +21,8 @@
 				choosenImagePaths: [],
 				currentImageIndex: -1,
 				currentImageHeight: 0,
-				screenWidth: uni.getSystemInfoSync().screenWidth
+				screenWidth: uni.getSystemInfoSync().screenWidth,
+				logos: []
 			};
 		},
 
@@ -53,6 +53,7 @@
 					success(res) {
 						_this.choosenImagePaths = res.tempFilePaths
 						_this.currentImageIndex = 0
+						_this.opacity = 1
 					}
 				})
 			},
@@ -60,6 +61,19 @@
 			clickImage(index) {
 				this.currentImageIndex = index
 			},
+			
+			addLogo(){
+				this.logos = [{
+					path: '../../static/img/haizideyu.png',
+					width: this.screenWidth /5,
+					height: this.screenWidth / 10
+				}]
+			},
+			
+			processPics(){
+				let view = uni.createSelectorQuery().select('#l11ogo')
+				console.log(view.boundingClientRect())
+			}
 		}
 	}
 </script>

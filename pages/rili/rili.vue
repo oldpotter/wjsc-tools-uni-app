@@ -110,7 +110,8 @@
 								context.setFontSize(20)
 								context.setTextAlign('center')
 								context.setFillStyle('DarkGray')
-								context.fillText(dayjs().format('YYYY-MM-DD'), 150, 45)
+								context.setFontSize('14')
+								context.fillText(dayjs().format('MM.DD'), 265, 245)
 								context.draw()
 								_this.canDownload = true
 							}
