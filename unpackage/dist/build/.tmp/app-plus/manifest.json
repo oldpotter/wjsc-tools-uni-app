@@ -41,9 +41,9 @@
     "distribute": {
       "icons": {
         "android": {
-          "xxhdpi": "/Users/oldpotter/Downloads/驯鹿.png",
-          "xxxhdpi": "/Users/oldpotter/Downloads/驯鹿 (1).png",
-          "xhdpi": "/Users/oldpotter/Downloads/驯鹿 (2).png"
+          "xxhdpi": "",
+          "xxxhdpi": "",
+          "xhdpi": ""
         }
       },
       "google": {

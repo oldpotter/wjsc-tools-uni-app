@@ -1,11 +1,21 @@
 <template>
 	<view style="width: 100vw; display: flex; flex-direction: column; justify-content: flex-start; align-items: center;">
 		<canvas style="width: 300px; height: 300px; background: #EFEFF4; border: 1px solid #DDDDDD; margin: 20px 0;"
-		 canvas-id="myCanvas"></canvas>
+		 canvas-id="myCanvas" @touchstart="touchStart"></canvas>
 		<view style="display: flex; flex-direction: row; justify-content: space-between; width: 90vw;">
 			<button type="primary" @click="open">获取图片</button>
 			<button type="default" @click="save" :disabled="!canDownload">保存图片</button>
 			<button type="default" @click="getText" :disabled="!canDownload">识别文字</button>
+		</view>
+		<view style="display: flex; flex-direction: row; justify-content: space-between; width: 90vw; margin-top: 20px;">
+			<button type="default" @click="big" :disabled="!canDownload">放大</button>
+			<button type="default" @click="small" :disabled="!canDownload">缩小</button>
+		</view>
+		<view style="display: flex; flex-direction: row; justify-content: space-between; width: 90vw; margin-top: 20px;">
+			<button type="default" @click="up" :disabled="!canDownload">⬆️</button>
+			<button type="default" @click="down" :disabled="!canDownload">⬇️</button>
+			<button type="default" @click="left" :disabled="!canDownload">⬅️</button>
+			<button type="default" @click="right" :disabled="!canDownload">➡️</button>
 		</view>
 		<!-- <image :src="c" mode="aspectFit"></image> -->
 		<textarea style="border: 1upx solid #DDDDDD; margin: 20px 10px; " maxlength="-1" v-model="text" :style="{display: !text? 'none':'block'}" />
@@ -22,7 +32,10 @@
 			return {
 				canDownload: false,
 				text: '',
-				// c: ''
+				selectImagePath: '',
+				rate: 1,
+				X:0,
+				Y:0,
 			};
 		},
 
@@ -39,6 +52,63 @@
 		},
 
 		methods: {
+			big(){
+				this.rate += 0.02
+				this.drawAll()
+			},
+			small(){
+				this.rate -= 0.02
+				this.drawAll()
+			},
+			
+			up(){
+				this.Y -= 1
+				this.drawAll()
+			},
+			down(){
+				this.Y += 1
+				this.drawAll()
+			},
+			left(){
+				this.X -= 1
+				this.drawAll()
+			},
+			right(){
+				this.X += 1
+				this.drawAll()
+			},
+			drawAll(){
+				const _this = this
+				uni.getImageInfo({
+							src: _this.selectImagePath,
+							success(image) {
+								const context = uni.createCanvasContext('myCanvas')
+								context.clearRect(0, 0, 300, 300)
+								context.arc(150, 145, 130, 0, 360)
+								context.fillStyle = '#ffffff'
+								context.fill()
+								context.globalCompositeOperation = 'source-atop'
+								const {
+									dx,
+									dy,
+									dWidth,
+									dHeight
+								} = _this.getCanvasInfo(image, 300, 300)
+								context.drawImage(image.path, -dx + _this.X, -dy + _this.Y, dWidth*_this.rate, dHeight*_this.rate)
+								context.globalCompositeOperation = 'source-over'
+								context.drawImage('../../static/img/logo.jpg', 10, 260, 500 / 7, 198 / 7)
+								context.drawImage('../../static/img/qr.jpeg', 250, 250, 37, 37)
+								context.setFontSize(20)
+								context.setTextAlign('center')
+								context.setFillStyle('DarkGray')
+								context.setFontSize('14')
+								context.fillText(dayjs().format('MM.DD'), 265, 245)
+								context.draw()
+								_this.canDownload = true
+							}
+						})
+			},
+			
 			copy(){
 				const _this = this
 				uni.setClipboardData({
@@ -88,35 +158,9 @@
 				uni.chooseImage({
 					success(res) {
 						const imagePath = res.tempFilePaths[0]
-						uni.getImageInfo({
-							src: res.tempFilePaths[0],
-							success(image) {
-								const context = uni.createCanvasContext('myCanvas')
-								context.clearRect(0, 0, 300, 300)
-								context.arc(150, 145, 130, 0, 360)
-								context.fillStyle = '#ffffff'
-								context.fill()
-								context.globalCompositeOperation = 'source-atop'
-								const {
-									dx,
-									dy,
-									dWidth,
-									dHeight
-								} = _this.getCanvasInfo(image, 300, 300)
-								context.drawImage(image.path, -dx, -dy, dWidth, dHeight)
-								context.globalCompositeOperation = 'source-over'
-								context.drawImage('../../static/img/logo.jpg', 10, 260, 500 / 7, 198 / 7)
-								context.drawImage('../../static/img/qr.jpeg', 250, 250, 37, 37)
-								context.setFontSize(20)
-								context.setTextAlign('center')
-								context.setFillStyle('DarkGray')
-								context.setFontSize('14')
-								context.fillText(dayjs().format('MM.DD'), 265, 245)
-								context.draw()
-								_this.canDownload = true
-							}
-						})
-					},
+						_this.selectImagePath = imagePath
+						_this.drawAll()
+						},
 					fail() {
 						uni.showToast({
 							title: '失败啦！！！',
