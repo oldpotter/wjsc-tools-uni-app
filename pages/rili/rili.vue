@@ -17,6 +17,14 @@
 			<button type="default" @click="left" :disabled="!canDownload">⬅️</button>
 			<button type="default" @click="right" :disabled="!canDownload">➡️</button>
 		</view>
+		<view class="uni-title">亮度</view>
+
+		<slider style="width: 80vw" value="60" @change="changeBrt" step="5" :disabled="isSliderDisable" show-value />
+
+		<view class="uni-title">对比度</view>
+
+		<slider style="width: 80vw" value="60" @change="changeCons" step="5" :disabled="isSliderDisable" show-value />
+
 		<!-- <image :src="c" mode="aspectFit"></image> -->
 		<textarea style="border: 1upx solid #DDDDDD; margin: 20px 10px; " maxlength="-1" v-model="text" :style="{display: !text? 'none':'block'}" />
 		<button type="default" @click="copy" :hidden="!text">复制文本</button>
@@ -25,6 +33,7 @@
 </template>
 
 <script>
+	var Jimp = require('jimp')
 	import dayjs from 'dayjs'
 	import { pathToBase64, base64ToPath } from 'image-tools'
 	export default {
@@ -36,6 +45,7 @@
 				rate: 1,
 				X:0,
 				Y:0,
+				isSliderDisable: false
 			};
 		},
 
@@ -52,6 +62,33 @@
 		},
 
 		methods: {
+			changeBrt(e){
+				this.isSliderDisable = true
+				Jimp.read(this.selectImagePath)
+				.then(image => {
+					const value = e.detail.value / 100 - 0.5
+					image.brightness(value)
+					.getBase64Async(Jimp.MIME_PNG)
+					.then(imgSrc => {
+						this.isSliderDisable = false
+						this.drawAll(imgSrc)
+					})
+				})
+			},
+			
+			changeCons(e){
+				this.isSliderDisable = true
+				Jimp.read(this.selectImagePath)
+				.then(image => {
+					const value = e.detail.value / 100 - 0.5
+					image.contrast(value)
+					.getBase64Async(Jimp.MIME_PNG)
+					.then(imgSrc => {
+						this.isSliderDisable = false
+						this.drawAll(imgSrc)
+					})
+				})
+			},
 			big(){
 				this.rate += 0.02
 				this.drawAll()
@@ -77,11 +114,12 @@
 				this.X += 1
 				this.drawAll()
 			},
-			drawAll(){
+			drawAll(imagePath=null){
 				const _this = this
 				uni.getImageInfo({
 							src: _this.selectImagePath,
 							success(image) {
+								// console.log('drawAll', image)
 								const context = uni.createCanvasContext('myCanvas')
 								context.clearRect(0, 0, 300, 300)
 								context.arc(150, 145, 130, 0, 360)
@@ -94,7 +132,8 @@
 									dWidth,
 									dHeight
 								} = _this.getCanvasInfo(image, 300, 300)
-								context.drawImage(image.path, -dx + _this.X, -dy + _this.Y, dWidth*_this.rate, dHeight*_this.rate)
+								const p = imagePath ? imagePath : image.path
+								context.drawImage(p, -dx + _this.X, -dy + _this.Y, dWidth*_this.rate, dHeight*_this.rate)
 								context.globalCompositeOperation = 'source-over'
 								context.drawImage('../../static/img/logo.jpg', 10, 260, 500 / 7, 198 / 7)
 								context.drawImage('../../static/img/qr.jpeg', 250, 250, 37, 37)

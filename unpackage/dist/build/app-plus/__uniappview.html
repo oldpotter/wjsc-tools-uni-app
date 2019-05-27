@@ -4,8 +4,11 @@
     <head>
         <meta charset="UTF-8" />
         <script>
-            var coverSupport = 'CSS' in window && typeof CSS.supports === 'function' && (CSS.supports('top: env(a)') || CSS.supports('top: constant(a)'))
-            document.write('<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0' + (coverSupport ? ', viewport-fit=cover' : '') + '" />')
+            var coverSupport = 'CSS' in window && typeof CSS.supports === 'function' && (CSS.supports('top: env(a)') ||
+                CSS.supports('top: constant(a)'))
+            document.write(
+                '<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0' +
+                (coverSupport ? ', viewport-fit=cover' : '') + '" />')
         </script>
         <title>View</title>
         <style>
@@ -17,11 +20,9 @@
             input[type="search"i]::-webkit-search-cancel-button {
                 display: none;
             }
-
         </style>
         <script>
-            var __wxConfig = {"debug":false,"appname":"工具集","entryPagePath":"pages/rili/rili.html","page":{"pages/rili/rili.html":{"window":{"usingComponents":{},"navigationBarTitleText":"每日对话"}},"pages/pics/pics.html":{"window":{"usingComponents":{},"navigationBarTitleText":"批量水印"}},"pages/test/test.html":{"window":{"usingComponents":{}}}},"global":{"window":{"navigationBarTextStyle":"white","navigationBarBackgroundColor":"#0faeff","backgroundColor":"#fbf9fe"}},"tabBar":{"color":"#7a7e83","selectedColor":"#0faeff","backgroundColor":"#ffffff","borderStyle":"black","list":[],"position":"bottom"},"networkTimeout":{"request":60000,"connectSocket":60000,"uploadFile":60000,"downloadFile":60000},"platform":"devtools","pages":["pages/rili/rili","pages/pics/pics","pages/test/test"],"subPackages":[],"usingComponents":{},"splashscreen":{"alwaysShowBeforeRender":true,"autoclose":false},"compilerVersion":"1.9.2"}
-
+            var __wxConfig = {"debug":false,"appname":"工具集","entryPagePath":"pages/rili/rili.html","page":{"pages/rili/rili.html":{"window":{"usingComponents":{},"navigationBarTitleText":"每日对话"}},"pages/pics/pics.html":{"window":{"usingComponents":{},"navigationBarTitleText":"批量水印"}},"pages/pics/logos.html":{"window":{"usingComponents":{},"navigationBarTitleText":"选择Logo"}},"pages/test/test.html":{"window":{"usingComponents":{}}}},"global":{"window":{"navigationBarTextStyle":"white","navigationBarBackgroundColor":"#0faeff","backgroundColor":"#fbf9fe"}},"tabBar":{"color":"#7a7e83","selectedColor":"#0faeff","backgroundColor":"#ffffff","borderStyle":"black","list":[{"pagePath":"pages/rili/rili.html","text":"每日对话"},{"pagePath":"pages/pics/pics.html","text":"批量水印"}],"position":"bottom"},"networkTimeout":{"request":60000,"connectSocket":60000,"uploadFile":60000,"downloadFile":60000},"platform":"devtools","pages":["pages/rili/rili","pages/pics/pics","pages/pics/logos","pages/test/test"],"subPackages":[],"usingComponents":{},"splashscreen":{"alwaysShowBeforeRender":true,"autoclose":false},"compilerVersion":"1.9.9"}
         </script>
         <script>
             var __id__ = '';
@@ -29,9 +30,22 @@
                 __id__ = page;
                 document.title = page;
                 // window.history.pushState('', '', page);
-                plus.webview.currentWebview().setJsFile('_www/' + page.replace('.html', '.js'));
+                var wxss = page.replace('.html', '.wxss')
+                if (
+                    typeof __wxAppCode__ !== 'undefined' &&
+                    __wxAppCode__.hasOwnProperty(wxss)
+                ) {
+                    var setCssToHead = __wxAppCode__[wxss]
+                    typeof setCssToHead === 'function' && setCssToHead()
+                    document.dispatchEvent(new CustomEvent("generateFuncReady", {
+                        detail: {
+                            generateFunc: $gwx(page.replace('.html', '.wxml'))
+                        }
+                    }));
+                } else {
+                    plus.webview.currentWebview().setJsFile('_www/' + page.replace('.html', '.js'));
+                }
             };
-
         </script>
         <script src="__uniappes6.js"></script>
         <script src="uniapp://ready"></script>

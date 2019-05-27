@@ -41,9 +41,9 @@
     "distribute": {
       "icons": {
         "android": {
-          "xxhdpi": "/Users/oldpotter/Downloads/驯鹿.png",
-          "xxxhdpi": "/Users/oldpotter/Downloads/驯鹿 (1).png",
-          "xhdpi": "/Users/oldpotter/Downloads/驯鹿 (2).png"
+          "xxhdpi": "",
+          "xxxhdpi": "",
+          "xhdpi": ""
         }
       },
       "google": {
@@ -83,8 +83,14 @@
     },
     "arguments": "{\"name\":\"\",\"path\":\"\",\"query\":\"\",\"id\":0}",
     "allowsInlineMediaPlayback": true,
+    "safearea": {
+      "background": "#ffffff",
+      "bottom": {
+        "offset": "auto"
+      }
+    },
     "uni-app": {
-      "compilerVersion": "1.9.2",
+      "compilerVersion": "1.9.9",
       "control": "webview"
     }
   }

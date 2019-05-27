@@ -2,6 +2,7 @@
   "pages": [
     "pages/rili/rili",
     "pages/pics/pics",
+    "pages/pics/logos",
     "pages/test/test"
   ],
   "subPackages": [],
@@ -14,12 +15,22 @@
   "tabBar": {
     "color": "#7a7e83",
     "selectedColor": "#0faeff",
-    "backgroundColor": "#ffffff"
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/rili/rili",
+        "text": "每日对话"
+      },
+      {
+        "pagePath": "pages/pics/pics",
+        "text": "批量水印"
+      }
+    ]
   },
   "splashscreen": {
     "alwaysShowBeforeRender": true,
     "autoclose": false
   },
   "appname": "工具集",
-  "compilerVersion": "1.9.2"
+  "compilerVersion": "1.9.9"
 }
