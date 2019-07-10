@@ -14,7 +14,6 @@
 </template>
 
 <script>
-	im
 	export default {
 		data() {
 			return {

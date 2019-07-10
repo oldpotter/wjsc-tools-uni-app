@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/rili/rili",
+    "pages/rili/adjust",
     "pages/pics/pics",
     "pages/pics/logos",
     "pages/test/test"
@@ -27,10 +28,11 @@
       }
     ]
   },
+  "nvueCompiler": "weex",
   "splashscreen": {
     "alwaysShowBeforeRender": true,
     "autoclose": false
   },
   "appname": "工具集",
-  "compilerVersion": "1.9.9"
+  "compilerVersion": "2.0.1"
 }

@@ -7,6 +7,12 @@
 			}
 		},
 		{
+			"path": "pages/rili/adjust",
+			"style": {
+				"navigationBarTitleText": "调整图片"
+			}
+		},
+		{
 			"path": "pages/pics/pics",
 			"style": {
 				"navigationBarTitleText": "批量水印"
@@ -20,24 +26,26 @@
 		},
 		{
 			"path": "pages/test/test",
-			"style": {}
+			"style": {
+				"navigationBarTitleText": "测试"
+			}
 		}
 	],
-	"tabBar": {
-		"color": "#7a7e83",
-		"selectedColor": "#0faeff",
-		"backgroundColor": "#ffffff",
-		"list": [{
-				"pagePath": "pages/rili/rili",
-				"text": "每日对话"
-			},
-			{
-				"pagePath": "pages/pics/pics",
-				"text": "批量水印"
-			}
-		]
-
-	},
+// 	"tabBar": {
+// 		"color": "#7a7e83",
+// 		"selectedColor": "#0faeff",
+// 		"backgroundColor": "#ffffff",
+// 		"list": [{
+// 				"pagePath": "pages/rili/rili",
+// 				"text": "每日对话"
+// 			},
+// 			{
+// 				"pagePath": "pages/pics/pics",
+// 				"text": "批量水印"
+// 			}
+// 		]
+// 
+// 	},
 	"globalStyle": {
 		"navigationBarTextStyle": "white",
 		"navigationBarBackgroundColor": "#0faeff",

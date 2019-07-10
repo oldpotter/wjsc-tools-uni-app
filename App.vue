@@ -1,5 +1,8 @@
 <script>
 	export default {
+		globalData: {
+			image: null
+		},
 		onLaunch: function() {
 			console.log('App Launch');
 		},

@@ -7,25 +7,17 @@
 			<button type="default" @click="save" :disabled="!canDownload">保存图片</button>
 			<button type="default" @click="getText" :disabled="!canDownload">识别文字</button>
 		</view>
+	
 		<view style="display: flex; flex-direction: row; justify-content: space-between; width: 90vw; margin-top: 20px;">
-			<button type="default" @click="big" :disabled="!canDownload">放大</button>
-			<button type="default" @click="small" :disabled="!canDownload">缩小</button>
+			<button type="default" @click="changeShape('big')" :disabled="!canDownload">放大</button>
+			<button type="default" @click="changeShape('small')" :disabled="!canDownload">缩小</button>
 		</view>
 		<view style="display: flex; flex-direction: row; justify-content: space-between; width: 90vw; margin-top: 20px;">
-			<button type="default" @click="up" :disabled="!canDownload">⬆️</button>
-			<button type="default" @click="down" :disabled="!canDownload">⬇️</button>
-			<button type="default" @click="left" :disabled="!canDownload">⬅️</button>
-			<button type="default" @click="right" :disabled="!canDownload">➡️</button>
+			<button type="default" @click="changeShape('up')" :disabled="!canDownload">⬆️</button>
+			<button type="default" @click="changeShape('down')" :disabled="!canDownload">⬇️</button>
+			<button type="default" @click="changeShape('left')" :disabled="!canDownload">⬅️</button>
+			<button type="default" @click="changeShape('right')" :disabled="!canDownload">➡️</button>
 		</view>
-		<view class="uni-title">亮度</view>
-
-		<slider style="width: 80vw" value="60" @change="changeBrt" step="5" :disabled="isSliderDisable" show-value />
-
-		<view class="uni-title">对比度</view>
-
-		<slider style="width: 80vw" value="60" @change="changeCons" step="5" :disabled="isSliderDisable" show-value />
-
-		<!-- <image :src="c" mode="aspectFit"></image> -->
 		<textarea style="border: 1upx solid #DDDDDD; margin: 20px 10px; " maxlength="-1" v-model="text" :style="{display: !text? 'none':'block'}" />
 		<button type="default" @click="copy" :hidden="!text">复制文本</button>
 		
@@ -33,9 +25,9 @@
 </template>
 
 <script>
-	var Jimp = require('jimp')
 	import dayjs from 'dayjs'
 	import { pathToBase64, base64ToPath } from 'image-tools'
+	
 	export default {
 		data() {
 			return {
@@ -45,7 +37,7 @@
 				rate: 1,
 				X:0,
 				Y:0,
-				isSliderDisable: false
+				isSliderDisable: false,
 			};
 		},
 
@@ -60,60 +52,35 @@
 			context.fill()
 			context.draw()
 		},
+		
+
 
 		methods: {
-			changeBrt(e){
-				this.isSliderDisable = true
-				Jimp.read(this.selectImagePath)
-				.then(image => {
-					const value = e.detail.value / 100 - 0.5
-					image.brightness(value)
-					.getBase64Async(Jimp.MIME_PNG)
-					.then(imgSrc => {
-						this.isSliderDisable = false
-						this.drawAll(imgSrc)
-					})
-				})
+			changeShape(v){
+				switch(v){
+					case 'big':
+						this.rate += 0.02
+						break
+					case 'small':
+						this.rate -= 0.02
+						break
+					case 'up':
+						this.Y -= 5
+						break	
+					case 'down':
+						this.Y += 5
+						break
+					case 'left':
+						this.X -= 5
+						break
+					case 'right':
+						this.X += 5
+						break
+				}
+				this.drawAll()
+				
 			},
 			
-			changeCons(e){
-				this.isSliderDisable = true
-				Jimp.read(this.selectImagePath)
-				.then(image => {
-					const value = e.detail.value / 100 - 0.5
-					image.contrast(value)
-					.getBase64Async(Jimp.MIME_PNG)
-					.then(imgSrc => {
-						this.isSliderDisable = false
-						this.drawAll(imgSrc)
-					})
-				})
-			},
-			big(){
-				this.rate += 0.02
-				this.drawAll()
-			},
-			small(){
-				this.rate -= 0.02
-				this.drawAll()
-			},
-			
-			up(){
-				this.Y -= 1
-				this.drawAll()
-			},
-			down(){
-				this.Y += 1
-				this.drawAll()
-			},
-			left(){
-				this.X -= 1
-				this.drawAll()
-			},
-			right(){
-				this.X += 1
-				this.drawAll()
-			},
 			drawAll(imagePath=null){
 				const _this = this
 				uni.getImageInfo({
@@ -122,9 +89,11 @@
 								// console.log('drawAll', image)
 								const context = uni.createCanvasContext('myCanvas')
 								context.clearRect(0, 0, 300, 300)
+								context.fillStyle = '#FFFFFF'
 								context.arc(150, 145, 130, 0, 360)
-								context.fillStyle = '#ffffff'
+								
 								context.fill()
+								context.shadowColor = '#FFFFFF'
 								context.globalCompositeOperation = 'source-atop'
 								const {
 									dx,
@@ -141,7 +110,14 @@
 								context.setTextAlign('center')
 								context.setFillStyle('DarkGray')
 								context.setFontSize('14')
-								context.fillText(dayjs().format('MM.DD'), 265, 245)
+								context.fillText(dayjs().format('MM.DD'), 270, 245)
+								context.globalCompositeOperation = 'destination-over'
+								context.arc(150, 145, 130, 0, 360)
+								context.shadowOffsetX = 15
+								context.shadowOffsetY = -5
+								context.shadowBlur = 15
+								context.shadowColor = '#8F8F94'
+								context.fill()
 								context.draw()
 								_this.canDownload = true
 							}
@@ -192,12 +168,19 @@
 				}
 			},
 
+			
 			open() {
 				const _this = this
 				uni.chooseImage({
 					success(res) {
 						const imagePath = res.tempFilePaths[0]
 						_this.selectImagePath = imagePath
+						// uni.navigateTo({
+						// 	url: './adjust?src=' + imagePath,
+						// 	success: res => {},
+						// 	fail: () => {},
+						// 	complete: () => {}
+						// });
 						_this.drawAll()
 						},
 					fail() {
