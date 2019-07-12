@@ -38,6 +38,7 @@
 				X:0,
 				Y:0,
 				isSliderDisable: false,
+				src: null
 			};
 		},
 
@@ -53,7 +54,13 @@
 			context.draw()
 		},
 		
-
+		onShow(){
+			const imagePath = getApp().globalData.imagePath
+			if(imagePath != null){
+				this.selectImagePath = imagePath
+				this.drawAll()
+			}
+		},
 
 		methods: {
 			changeShape(v){
@@ -91,7 +98,6 @@
 								context.clearRect(0, 0, 300, 300)
 								context.fillStyle = '#FFFFFF'
 								context.arc(150, 145, 130, 0, 360)
-								
 								context.fill()
 								context.shadowColor = '#FFFFFF'
 								context.globalCompositeOperation = 'source-atop'
@@ -175,13 +181,13 @@
 					success(res) {
 						const imagePath = res.tempFilePaths[0]
 						_this.selectImagePath = imagePath
-						// uni.navigateTo({
-						// 	url: './adjust?src=' + imagePath,
-						// 	success: res => {},
-						// 	fail: () => {},
-						// 	complete: () => {}
-						// });
-						_this.drawAll()
+						uni.navigateTo({
+							url: './adjust?src=' + imagePath,
+							success: res => {},
+							fail: () => {},
+							complete: () => {}
+						});
+						// _this.drawAll()
 						},
 					fail() {
 						uni.showToast({
@@ -244,6 +250,7 @@
 			},
 
 			save() {
+				const _this = this
 				uni.canvasToTempFilePath({
 					canvasId: 'myCanvas',
 					fileType: 'jpg',

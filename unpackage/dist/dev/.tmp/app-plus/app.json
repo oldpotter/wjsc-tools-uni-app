@@ -13,21 +13,6 @@
     "backgroundColor": "#fbf9fe"
   },
   "usingComponents": {},
-  "tabBar": {
-    "color": "#7a7e83",
-    "selectedColor": "#0faeff",
-    "backgroundColor": "#ffffff",
-    "list": [
-      {
-        "pagePath": "pages/rili/rili",
-        "text": "每日对话"
-      },
-      {
-        "pagePath": "pages/pics/pics",
-        "text": "批量水印"
-      }
-    ]
-  },
   "nvueCompiler": "weex",
   "splashscreen": {
     "alwaysShowBeforeRender": true,

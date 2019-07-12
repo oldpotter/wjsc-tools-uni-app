@@ -1,7 +1,7 @@
 <template>
 	<view style="width: 100vw; display: flex; flex-direction: column; justify-content: flex-start; align-items: center;">
-		<image :style="imgStyle" :src="src" mode="aspectFill"></image>
-		<canvas style="display: none;" canvas-id="myCanvas"></canvas>
+		<image :style="imgStyle" :src="src" mode="aspectFit"></image>
+		<canvas style="width: 300px; height: 300px; background: #EFEFF4; opacity: 0; position: fixed" canvas-id="myCanvas"></canvas>
 		<view class="uni-title">亮度/对比度</view>
 		<slider style="width: 80vw" min="-100" max="100"  @change="changeVal" step="5" :disabled="isProcessing"
 		 show-value />
@@ -16,7 +16,7 @@
 			return {
 				value: 1,
 				src: null,
-				isProcessing: false
+				isProcessing: false,
 			}
 		},
 		
@@ -28,6 +28,9 @@
 
 		onLoad(e) {
 			this.src = e.src
+			const info = uni.getSystemInfo()
+			this.screenWidth = info.screenWidth
+			this.screenHeight = info.screenHeight
 		},
 		
 		methods: {
@@ -45,26 +48,74 @@
 					title: '',
 					mask: false
 				});
-				
-				uni.uploadFile({
-							url: 'http://192.168.31.99:3001/jimp',
-							filePath: _this.src,
-							name: 'file',
-							formData: {
-								brightness: _this.value - 1,
-								contrast: _this.value - 1
+				uni.getImageInfo({
+					src: _this.src,
+					success(image) {
+						const context = uni.createCanvasContext('myCanvas')
+						let w, h, ratio
+						if(image.width >= image.height){
+							ratio = image.width / image.height
+							w = 300
+							h = 300 / ratio
+						}else{
+							ratio = image.height / image.width
+							h = 300
+							w = 300/ratio
+						}
+						context.drawImage(image.path, 0, 0, w, h)
+						context.draw()
+						
+						setTimeout(()=>{
+							uni.canvasToTempFilePath({
+							canvasId: 'myCanvas',
+							fileType: 'png',
+							width: w,
+							height: h,
+							success(res){
+								uni.uploadFile({
+											url: 'http://shenkeling.top:3001/jimp',
+											filePath: res.tempFilePath,
+											name: 'file',
+											formData: {
+												brightness: _this.value - 1,
+												contrast: _this.value - 1
+											},
+											success: res => {
+												console.log(res.data)
+												uni.hideLoading()
+												uni.downloadFile({
+													url: 'http://shenkeling.top:3001/download',
+													success(res){
+														getApp().globalData.imagePath = res.tempFilePath
+														uni.navigateBack()
+													},
+													fail(err){
+														console.error('下载失败', err)
+													}
+												})
+											},
+											fail: (err) => {
+												console.error('fail!', err)
+											},
+											complete: () => {
+												uni.hideLoading()
+											}
+										});
+										
 							},
-							success: res => {
-								console.log(res.data)
-							},
-							fail: (err) => {
-								console.error('fail!', err)
-							},
-							complete: () => {
-								uni.hideLoading()
+							
+							fail(err){
+								console.log('canvasToTempFilePath fail:', err)
 							}
-						});
-			}
+						})
+						}, 1000)
+						
+					
+					}
+				})
+				
+				
+				}
 		}
 	}
 </script>

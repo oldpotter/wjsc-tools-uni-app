@@ -83,12 +83,6 @@
     },
     "arguments": "{\"name\":\"\",\"path\":\"\",\"query\":\"\",\"id\":0}",
     "allowsInlineMediaPlayback": true,
-    "safearea": {
-      "background": "#ffffff",
-      "bottom": {
-        "offset": "auto"
-      }
-    },
     "uni-app": {
       "compilerVersion": "2.0.1",
       "control": "webview",
