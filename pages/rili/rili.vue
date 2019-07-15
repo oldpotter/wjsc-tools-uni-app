@@ -18,6 +18,9 @@
 			<button type="default" @click="changeShape('left')" :disabled="!canDownload">⬅️</button>
 			<button type="default" @click="changeShape('right')" :disabled="!canDownload">➡️</button>
 		</view>
+		<view style="display: flex; flex-direction: row; justify-content: space-between; width: 90vw; margin-top: 20px;">
+			<button type="default" @click="toAdjust" :disabled="!canDownload">调整亮度/对比度️</button>
+		</view>
 		<textarea style="border: 1upx solid #DDDDDD; margin: 20px 10px; " maxlength="-1" v-model="text" :style="{display: !text? 'none':'block'}" />
 		<button type="default" @click="copy" :hidden="!text">复制文本</button>
 		
@@ -63,6 +66,15 @@
 		},
 
 		methods: {
+			toAdjust(){
+				const _this = this
+				uni.navigateTo({
+					url: './adjust?src=' + _this.selectImagePath,
+					success: res => {},
+					fail: () => {},
+					complete: () => {}
+				});
+			},
 			changeShape(v){
 				switch(v){
 					case 'big':
@@ -181,13 +193,13 @@
 					success(res) {
 						const imagePath = res.tempFilePaths[0]
 						_this.selectImagePath = imagePath
-						uni.navigateTo({
-							url: './adjust?src=' + imagePath,
-							success: res => {},
-							fail: () => {},
-							complete: () => {}
-						});
-						// _this.drawAll()
+						// uni.navigateTo({
+						// 	url: './adjust?src=' + imagePath,
+						// 	success: res => {},
+						// 	fail: () => {},
+						// 	complete: () => {}
+						// });
+						_this.drawAll()
 						},
 					fail() {
 						uni.showToast({

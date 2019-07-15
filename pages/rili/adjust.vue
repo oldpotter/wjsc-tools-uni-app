@@ -68,7 +68,8 @@
 						setTimeout(()=>{
 							uni.canvasToTempFilePath({
 							canvasId: 'myCanvas',
-							fileType: 'png',
+							fileType: 'jpg',
+							quality: 1,
 							width: w,
 							height: h,
 							success(res){
@@ -86,6 +87,9 @@
 												uni.downloadFile({
 													url: 'http://shenkeling.top:3001/download',
 													success(res){
+														uni.showToast({
+															title: 'okok'
+														});
 														getApp().globalData.imagePath = res.tempFilePath
 														uni.navigateBack()
 													},
